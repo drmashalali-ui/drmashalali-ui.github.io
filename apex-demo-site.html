@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apex Heating &amp; Cooling | Austin, TX</title>
+<style>
+:root{--bg:#f7f9fc;--card:#fff;--ink:#14213d;--mut:#5b667a;--brand:#e4572e;--blue:#1d4e89;--line:#e1e6ee;--bot:#eef2f8}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1522;--card:#17202f;--ink:#eef2f8;--mut:#9aa6ba;--brand:#ff7a4d;--blue:#5aa0e6;--line:#26324a;--bot:#1f2a3d}}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font-weight:800;font-size:20px}.logo span{color:var(--brand)}
+.call{font-weight:700;color:var(--blue);text-decoration:none}
+.hero{padding:56px 0 40px}
+.hero h1{font-size:clamp(32px,6vw,52px);line-height:1.1;margin:0 0 14px}
+.hero p{color:var(--mut);font-size:18px;max-width:560px}
+.btn{display:inline-block;background:var(--brand);color:#fff;border:0;border-radius:10px;padding:14px 22px;font-size:16px;font-weight:700;cursor:pointer}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:30px 0}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.fact b{display:block;font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+h2{margin:40px 0 14px}
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.svc div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.svc h3{margin:0 0 6px;font-size:17px}.svc p{margin:0;color:var(--mut);font-size:15px}
+footer{padding:40px 0 120px;color:var(--mut);font-size:14px}
+#cb-btn{position:fixed;right:20px;bottom:20px;width:60px;height:60px;border-radius:50%;background:var(--brand);color:#fff;border:0;font-size:26px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:50}
+#cb{position:fixed;right:20px;bottom:92px;width:370px;max-width:calc(100vw - 24px);height:540px;max-height:calc(100vh - 110px);background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.28);display:none;flex-direction:column;overflow:hidden;z-index:50}
+#cb.open{display:flex}
+#cb-head{background:var(--blue);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+#cb-head b{display:block}#cb-head small{opacity:.85}
+#cb-x{background:none;border:0;color:#fff;font-size:22px;cursor:pointer}
+#cb-log{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px}
+.m{max-width:84%;padding:9px 13px;border-radius:14px;font-size:15px;white-space:pre-wrap;word-wrap:break-word}
+.m.bot{background:var(--bot);align-self:flex-start;border-bottom-left-radius:4px}
+.m.me{background:var(--blue);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.m.typing{opacity:.7;font-style:italic}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 8px}
+.chip{background:var(--card);border:1px solid var(--blue);color:var(--blue);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
+#cb-form{display:flex;border-top:1px solid var(--line)}
+#cb-in{flex:1;border:0;padding:14px;font-size:15px;background:transparent;color:var(--ink);outline:none}
+#cb-send{border:0;background:none;color:var(--brand);font-weight:700;padding:0 16px;cursor:pointer;font-size:15px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">Apex <span>Heating &amp; Cooling</span></div>
+    <a class="call" href="#">Austin, TX &middot; 7 AM&ndash;7 PM</a>
+  </header>
+  <section class="hero">
+    <h1>Fast, honest AC and heating repair in Austin.</h1>
+    <p>Licensed technicians, same-day and next-day appointments, and free on-site quotes. Book in under a minute.</p>
+    <button class="btn" onclick="openChat()">Book a free quote</button>
+  </section>
+  <div class="facts">
+    <div class="fact"><b>Service area</b>Austin metro</div>
+    <div class="fact"><b>Hours</b>7 AM&ndash;7 PM</div>
+    <div class="fact"><b>Quotes</b>Free, on site</div>
+  </div>
+  <h2>What we do</h2>
+  <div class="svc">
+    <div><h3>AC repair</h3><p>Not cooling, strange noises, frozen coils.</p></div>
+    <div><h3>Heating repair</h3><p>Furnaces and heat pumps, any make.</p></div>
+    <div><h3>Installation</h3><p>New systems sized for your home.</p></div>
+    <div><h3>Maintenance</h3><p>Seasonal tune-ups to prevent breakdowns.</p></div>
+  </div>
+  <footer>&copy; Apex Heating &amp; Cooling, Austin, TX. Demo site, fictional company.</footer>
+</div>
+
+<button id="cb-btn" onclick="openChat()" aria-label="Open chat">&#128172;</button>
+<div id="cb" role="dialog" aria-label="Chat with Apex">
+  <div id="cb-head"><div><b>Apex Heating &amp; Cooling</b><small>Typically replies instantly</small></div><button id="cb-x" onclick="closeChat()" aria-label="Close">&times;</button></div>
+  <div id="cb-log"></div>
+  <div class="chips" id="chips"></div>
+  <form id="cb-form"><input id="cb-in" placeholder="Type your message..." autocomplete="off"><button id="cb-send" type="submit">Send</button></form>
+</div>
+
+<script>
+/* ===== CONFIG ===== */
+const CONFIG = {
+  // Paste your n8n production webhook URL. Leave "" to run the built-in scripted fallback.
+  WEBHOOK_URL: "",
+  GREETING: "Hi! Welcome to Apex Heating & Cooling. I can answer questions or get you booked for a free on-site quote. What can I help with?"
+};
+
+/* ===== SLOTS (computed, never invented by the AI) ===== */
+const tmr = new Date(Date.now() + 864e5);
+const dayName = tmr.toLocaleDateString("en-US", {weekday:"long"});
+const SLOT_A = "tomorrow (" + dayName + ") 10 AM–12 PM";
+const SLOT_B = "tomorrow (" + dayName + ") 2–4 PM";
+
+/* ===== UI ===== */
+const log = document.getElementById("cb-log"), input = document.getElementById("cb-in"), chips = document.getElementById("chips");
+const sid = "web-" + Math.random().toString(36).slice(2, 10);
+let history = [], started = false, busy = false;
+
+function openChat(){ document.getElementById("cb").classList.add("open"); if(!started){started=true; bot(CONFIG.GREETING); setChips(["AC not cooling","What areas do you serve?","How much does it cost?"]);} input.focus(); }
+function closeChat(){ document.getElementById("cb").classList.remove("open"); }
+function add(text, cls){ const d=document.createElement("div"); d.className="m "+cls; d.textContent=text; log.appendChild(d); log.scrollTop=log.scrollHeight; return d; }
+function bot(t){ add(t,"bot"); history.push({role:"assistant",content:t}); }
+function setChips(list){ chips.innerHTML=""; list.forEach(t=>{ const c=document.createElement("button"); c.type="button"; c.className="chip"; c.textContent=t; c.onclick=()=>send(t); chips.appendChild(c); }); }
+
+document.getElementById("cb-form").addEventListener("submit", e=>{ e.preventDefault(); const v=input.value.trim(); if(v) send(v); });
+
+async function send(text){
+  if(busy) return; busy=true; input.value=""; chips.innerHTML="";
+  add(text,"me"); history.push({role:"user",content:text});
+  const t = add("Typing...","bot typing");
+  const started = Date.now();
+  let out;
+  try { out = CONFIG.WEBHOOK_URL ? await viaWebhook(text) : localBrain(text); }
+  catch(err){ out = {reply:"Sorry, I’m having trouble right now. Can I have your name and phone number so the team can call you back?", chips:[]}; }
+  const wait = Math.max(0, 700 - (Date.now()-started)); // natural pacing
+  setTimeout(()=>{ t.remove(); out.reply = guardPrice(out.reply); bot(out.reply); setChips(out.chips||[]); busy=false; input.focus(); }, wait);
+}
+
+/* Layer-2 price guardrail: runs on EVERY reply, webhook or local */
+function guardPrice(r){
+  return /\$|\bdollars?\b|\d+\s?(bucks|usd)\b/i.test(r)
+    ? "Our technician gives a free on-site quote, so you’ll get an exact number before any work starts."
+    : r;
+}
+
+async function viaWebhook(text){
+  const res = await fetch(CONFIG.WEBHOOK_URL, {
+    method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({ sessionId:sid, message:text, messages:history, slots:{A:SLOT_A,B:SLOT_B}, source:"web" })
+  });
+  if(!res.ok) throw new Error("bad status");
+  const d = await res.json();           // expected: { reply, chips? }
+  return { reply:d.reply, chips:d.chips||[] };
+}
+
+/* ===== Scripted fallback (offline demo; no LLM). n8n + LLM is the real brain ===== */
+const L = { step:"idle", name:"", phone:"", address:"", service:"", slot:"" };
+const re = {
+  price:/(price|cost|how much|quote|estimate|ballpark|fee|charge|cheap|expensive|\$)/i,
+  hours:/(hour|open|close|when are you)/i,
+  area:/(area|serve|service area|where|location|round rock|cedar park|pflugerville|georgetown|austin)/i,
+  book:/(book|appointment|schedule|tomorrow|today|ac |a\/c|air condition|heat|furnace|cool|broken|not working|repair|install|tune|maint|leak|noise)/i,
+  yes:/^(y|yes|yeah|yep|sure|ok|okay|please)\b/i,
+  a:/(\ba\b|10|morning|first|earlier)/i, b:/(\bb\b|2|afternoon|second|later|pm)/i,
+  human:/(human|person|someone|call me|callback|call back|agent)/i
+};
+function localBrain(msg){
+  const m = msg.trim();
+  if(L.step==="idle" && re.price.test(m) && !re.book.test(m.replace(/quote/i,"")))
+    return {reply:"Our technician gives a free quote on site, so there are no surprises. Want me to book a time?", chips:["Yes, book me","No thanks"]};
+  if(L.step==="idle"){
+    if(re.hours.test(m)) return {reply:"We’re open 7 AM–7 PM. Want me to get you on the schedule?", chips:["Yes, book me"]};
+    if(re.area.test(m) && !re.book.test(m)) return {reply:"We serve the Austin metro area. Is your home in the Austin area? I can book a free on-site quote.", chips:["Yes, book me"]};
+    if(re.human.test(m)){ L.step="cb_name"; return {reply:"Happy to have the team call you back. What’s your name?"}; }
+    if(re.book.test(m) || re.yes.test(m)){ L.service = re.yes.test(m)&&!re.book.test(m) ? "Free on-site quote" : m; L.step="name"; return {reply:"Got it, we can help. What’s your name?"}; }
+    return {reply:"I’m not sure I have that answer. Want the team to call you back, or I can book a free on-site quote?", chips:["Call me back","Book a quote"]};
+  }
+  if(L.step==="name"){ L.name=m; L.step="phone"; return {reply:"Thanks, "+m.split(" ")[0]+". What’s the best phone number?"}; }
+  if(L.step==="phone"){ if(m.replace(/\D/g,"").length<10) return {reply:"I need a 10-digit number so we can reach you. What’s the best phone number?"}; L.phone=m; L.step="address"; return {reply:"And the service address?"}; }
+  if(L.step==="address"){ L.address=m; L.step="slot"; return {reply:"We have "+SLOT_A+" or "+SLOT_B+". Which works?", chips:["Morning (10–12)","Afternoon (2–4)"]}; }
+  if(L.step==="slot"){
+    const pickB = re.b.test(m) && !/10|morning/i.test(m), pickA = re.a.test(m) && !pickB;
+    if(!pickA && !pickB) return {reply:"Sorry, I can only offer "+SLOT_A+" or "+SLOT_B+". Which one?", chips:["Morning (10–12)","Afternoon (2–4)"]};
+    L.slot = pickA ? SLOT_A : SLOT_B; L.step="done";
+    console.log("LEAD (fallback, not saved)", {...L, source:"web", status:"booked", timestamp:new Date().toISOString()});
+    return {reply:"You’re booked for "+L.slot+", "+L.name.split(" ")[0]+". A technician will come to "+L.address+" for a free on-site quote. Need to cancel? Just tell me here.", chips:["Cancel my booking"]};
+  }
+  if(L.step==="done"){
+    if(/cancel/i.test(m)){ L.step="cancelled"; return {reply:"Done, your appointment is cancelled. You can rebook any time."}; }
+    return {reply:"You’re all set. Anything else I can help with?"};
+  }
+  if(L.step==="cb_name"){ L.name=m; L.step="cb_phone"; return {reply:"Thanks. What’s the best number to reach you?"}; }
+  if(L.step==="cb_phone"){ L.phone=m; L.step="done"; console.log("CALLBACK (fallback, not saved)", {...L, status:"callback"}); return {reply:"Thanks, "+L.name.split(" ")[0]+". Someone from the team will call you back shortly."}; }
+  L.step="idle"; return localBrain(m);
+}
+</script>
+</body>
+</html>
